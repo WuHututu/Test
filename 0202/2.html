@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dom</title>
+  <style>
+    .rounded-white-box {
+      width: 350px;
+      height: 180px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0px 5px 20px  rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    img {
+      cursor: pointer;
+    }
+
+    @font-face {
+      font-family: 'LCD';
+      src: url('fonts/LCD2B-1.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+
+    }
+  </style>
+
+  <script>
+    function up() {
+      let s = document.getElementById('sw');
+      if (s.src.endsWith("images/switchUp.png")) {
+        let spanObj = document.getElementById('con');
+        let t = spanObj.innerText;
+        //加1赋值给spanObj.innerText
+        spanObj.innerText = parseInt(t) + 1 + '°C';
+      }
+    }
+
+    function down() {
+      let s = document.getElementById('sw');
+      if (s.src.endsWith("images/switchUp.png")) {
+        let spanObj = document.getElementById('con');
+        let t = spanObj.innerText;
+        spanObj.innerText = parseInt(t) - 1 + '°C';
+      }
+    }
+
+    function hot() {
+      let s = document.getElementById('sw');
+      let sun = document.getElementById('mode');
+      if (s.src.endsWith("images/switchUp.png") && sun.src.endsWith("images/xuehua.png")) {
+        init();
+        sun.style.visibility = 'visible';
+        sun.src = "images/sun.png";
+      }
+    }
+
+    <!--切换温度时初始化-->
+    function init() {
+      let spanObj = document.getElementById('con');
+      spanObj.innerText = 26 + '°C';
+    }
+    function cold() {
+      let s = document.getElementById('sw');
+      let xuehua = document.getElementById('mode');
+      if (s.src.endsWith("images/switchUp.png") && xuehua.src.endsWith("images/sun.png")) {
+        init();
+        xuehua.style.visibility = 'visible';
+        xuehua.src = "images/xuehua.png";
+      }
+
+    }
+    // function switchMode(sr) {
+    //   let s = document.getElementById('sw');
+    //   let sm = document.getElementById('mode');
+    //   if (s.src.endsWith("images/switchUp.png")) {
+    //     if (sm.src.endsWith("images/xuehua.png")) {
+    //       init();
+    //       sm.src = "images/sun.png";
+    //     } else if(sm.src.endsWith("images/sun.png")) {
+    //       init();
+    //       sm.src = "images/xuehua.png";
+    //     }
+    //   }
+    // }
+
+    function switchOnAndDown() {
+      let on = document.getElementById('mode');
+      let s = document.getElementById('sw');
+      if (s.src.endsWith("images/switchDown.png")) {
+        s.src = "images/switchUp.png";
+        on.style.visibility = 'visible';
+      } else {
+        s.src = "images/switchDown.png";
+        on.style.visibility = 'hidden';
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div name="n" style="font-family: 'LCD';font-size: 50px;margin: auto; margin-top: 200px;display: flex;" class="rounded-white-box">
+    <div >
+      <img src="images/energyConsumption.png" width="50px" style="margin-top: 32px;margin-left: 32px;" />
+    </div>
+    <div >
+      <img id="mode" src="images/xuehua.png" width="100px" style="visibility: hidden;">
+      <span id="con" style="margin: auto;margin-right: 150px;">26°C</span>
+    </div>
+  </div>
+  <div style="text-align: center;margin: auto; margin-top: 80px;margin-bottom: 20px;" >
+    <!--制冷-->
+    <img src="images/code.png" onclick="cold()" width=100px>
+    <!--开关-->
+    <img id="sw" src="images/switchDown.png" onclick="switchOnAndDown()" width=70px>
+    <!--制热-->
+    <img src="images/hot.png" onclick="hot()" width=100px>
+  </div>
+  <div style="text-align: center;margin: auto;">
+    <!--升温-->
+    <img src="images/up.png" alt="" onclick="javascript:up()" width=60px>
+  </div>
+  <div style="text-align: center;margin: auto;">
+    <!--降温-->
+    <img src="images/down.png" onclick="javascript:down()" width=60px>
+  </div>
+
+
+
+</body>
+
+</html>
